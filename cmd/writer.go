@@ -1,7 +1,11 @@
 package cmd
 
-import "log"
+import "encoding/json"
 
-func Printer(input string) {
-	log.Print(input)
+func JsonWrite(dataStruct interface{}) (encoded[]byte, err error) {
+	encoded, err = json.Marshal(dataStruct)
+	if err != nil {
+		return nil, err
+	}
+	return encoded, nil
 }
