@@ -1,4 +1,4 @@
-package myPrinter
+package cmd
 
 import "log"
 
