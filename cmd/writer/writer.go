@@ -1,6 +1,9 @@
 package writer
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"io"
+)
 
 func JsonWrite(dataStruct interface{}) (encoded[]byte, err error) {
 	encoded, err = json.Marshal(dataStruct)
@@ -10,8 +13,8 @@ func JsonWrite(dataStruct interface{}) (encoded[]byte, err error) {
 	return encoded, nil
 }
 
-func JsonFileUpload(path, fileName string) (encoded string, err error) {
-	marshal, err := json.Marshal(path+fileName)
+func JsonFileUpload(fileName io.Reader) (encoded string, err error) {
+	marshal, err := json.Marshal(fileName)
 	if err != nil {
 		return "", err
 	}
