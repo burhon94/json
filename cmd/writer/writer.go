@@ -9,3 +9,12 @@ func JsonWrite(dataStruct interface{}) (encoded[]byte, err error) {
 	}
 	return encoded, nil
 }
+
+func JsonFileUpload(path, fileName string) (encoded string, err error) {
+	marshal, err := json.Marshal(path+fileName)
+	if err != nil {
+		return "", err
+	}
+	encoded = string(marshal)
+	return encoded, nil
+}
