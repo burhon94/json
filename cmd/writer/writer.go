@@ -7,8 +7,8 @@ import (
 )
 
 type filePath struct {
-	Path     string
-	FileName string
+	Path string `json:"path"`
+	FileName string `json:"fileName"`
 }
 
 func JsonWrite(dataStruct interface{}) (encoded []byte, err error) {
@@ -43,3 +43,10 @@ func JsonFileUpload(path string) (encoded string, err error) {
 	encoded = string(marshal)
 	return encoded, nil
 }
+
+/*
+func main() {
+	upload, _ := JsonFileUpload("./cmd")
+	log.Print(upload)
+}
+ */
