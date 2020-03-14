@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-func ReadJSONBody(request *http.Request, dto interface{}) (err error) {
+func ReadJSONHTTP(request *http.Request, dto interface{}) (err error) {
 	if request.Header.Get("Content-Type") != "application/json" {
 		return errors.New(fmt.Sprintf("unsupported type for json: %v", err))
 	}
@@ -26,6 +26,14 @@ func ReadJSONBody(request *http.Request, dto interface{}) (err error) {
 	}()
 
 	err = json.Unmarshal(body, &dto)
+	if err != nil {
+		return errors.New(fmt.Sprintf("can't unmarshal json: %v", err))
+	}
+	return nil
+}
+
+func ReadJSON(body[]byte, dataStruct interface{}) error {
+	err := json.Unmarshal(body, &dataStruct)
 	if err != nil {
 		return errors.New(fmt.Sprintf("can't unmarshal json: %v", err))
 	}
